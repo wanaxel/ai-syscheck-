@@ -1,5 +1,5 @@
 # ai-syscheck
-a program i created for fun, it use ollama and detect ur system to use the best mode, its job is to detect any anomalies error and give recommendation to optimize your linux system 
+a program i created for fun, it use ollama and detect ur system to use the best mode, its job is to detect any anomalies error and give recommendation to optimize your linux system (this is for fun im not planning to continue this at all)
 
 ---
 
@@ -26,3 +26,6 @@ cd ai-syscheck-
 chmod +x ai-syscheck.sh
 sudo ./ai-syscheck.sh
 ```
+### Showcase 
+<img width="2850" height="2131" alt="image" src="https://github.com/user-attachments/assets/f00a33ad-0428-4327-8324-2897724656a6" />
+<img width="2751" height="2649" alt="image" src="https://github.com/user-attachments/assets/f3a24e18-982c-46e0-a910-d7489cf9dcf9" />
