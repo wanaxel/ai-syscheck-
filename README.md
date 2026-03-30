@@ -27,5 +27,10 @@ chmod +x ai-syscheck.sh
 sudo ./ai-syscheck.sh
 ```
 ### Showcase 
-<img width="2850" height="2131" alt="image" src="https://github.com/user-attachments/assets/f00a33ad-0428-4327-8324-2897724656a6" />
-<img width="2751" height="2649" alt="image" src="https://github.com/user-attachments/assets/f3a24e18-982c-46e0-a910-d7489cf9dcf9" />
+<img width="600" height="400" alt="image" src="https://github.com/user-attachments/assets/33da699c-af84-4fc5-afd7-bb16a77d1504" />
+<img width="600" height="400" alt="image" src="https://github.com/user-attachments/assets/591810f1-f373-4c22-a71a-21bc85e713ce" />
+<img width="600" height="400" alt="image" src="https://github.com/user-attachments/assets/192ab5e7-805c-4fad-b20e-06dc298e1c82" />
+<img width="600" height="400" alt="image" src="https://github.com/user-attachments/assets/56b7be01-f6fb-45a6-8986-9bfb2e1a029c" />
+<img width="600" height="400" alt="image" src="https://github.com/user-attachments/assets/1c4a2eb7-7029-4729-a352-5903737b75dd" />
+<img width="600" height="400" alt="image" src="https://github.com/user-attachments/assets/4af3e876-9817-4973-bb8c-5047838c2431" />
+
