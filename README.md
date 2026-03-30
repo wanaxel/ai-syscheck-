@@ -26,11 +26,26 @@ cd ai-syscheck-
 chmod +x ai-syscheck.sh
 sudo ./ai-syscheck.sh
 ```
-### Showcase 
-<img width="600" height="400" alt="image" src="https://github.com/user-attachments/assets/33da699c-af84-4fc5-afd7-bb16a77d1504" />
-<img width="600" height="400" alt="image" src="https://github.com/user-attachments/assets/591810f1-f373-4c22-a71a-21bc85e713ce" />
-<img width="600" height="400" alt="image" src="https://github.com/user-attachments/assets/192ab5e7-805c-4fad-b20e-06dc298e1c82" />
-<img width="600" height="400" alt="image" src="https://github.com/user-attachments/assets/56b7be01-f6fb-45a6-8986-9bfb2e1a029c" />
-<img width="600" height="400" alt="image" src="https://github.com/user-attachments/assets/1c4a2eb7-7029-4729-a352-5903737b75dd" />
-<img width="600" height="400" alt="image" src="https://github.com/user-attachments/assets/4af3e876-9817-4973-bb8c-5047838c2431" />
 
+| System Info | Storage Analyze | Kernel Analyze |
+|:-:|:-:|:-:|
+| ![](https://github.com/user-attachments/assets/33da699c-af84-4fc5-afd7-bb16a77d1504) | ![](https://github.com/user-attachments/assets/591810f1-f373-4c22-a71a-21bc85e713ce) | ![](https://github.com/user-attachments/assets/192ab5e7-805c-4fad-b20e-06dc298e1c82) |
+
+| Bootloader Analyze | Compositor/Gpu Analyze | Package Cache Analyze & End result |
+|:-:|:-:|:-:|
+| ![](https://github.com/user-attachments/assets/56b7be01-f6fb-45a6-8986-9bfb2e1a029c) | ![](https://github.com/user-attachments/assets/1c4a2eb7-7029-4729-a352-5903737b75dd) | ![](https://github.com/user-attachments/assets/4af3e876-9817-4973-bb8c-5047838c2431) |
+
+---
+
+## ⚠️ Disclaimer
+
+This tool is experimental and created for fun.  
+Use at your own risk, especially when running with `sudo`.
+
+---
+
+##  Contributing
+
+Not actively maintained, but feel free to fork and experiment with it.
+
+---
