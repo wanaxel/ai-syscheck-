@@ -21,23 +21,44 @@ detect_distro() {
 }
 
 detect_compositor() {
-    if [ -n "${HYPRLAND_INSTANCE_SIGNATURE:-}" ]; then
+    # Check env vars first (works without sudo).
+    # Fall back to pgrep (works with sudo, which strips the user env).
+    if   [ -n "${HYPRLAND_INSTANCE_SIGNATURE:-}" ] || pgrep -x Hyprland   &>/dev/null; then
         COMPOSITOR="hyprland"
-    elif [ -n "${SWAYSOCK:-}" ]; then
+    elif [ -n "${SWAYSOCK:-}" ]                    || pgrep -x sway        &>/dev/null; then
         COMPOSITOR="sway"
-    elif [ -n "${WAYFIRE_CONFIG_FILE:-}" ]; then
+    elif [ -n "${WAYFIRE_CONFIG_FILE:-}" ]         || pgrep -x wayfire     &>/dev/null; then
         COMPOSITOR="wayfire"
+    elif pgrep -x kwin_wayland &>/dev/null; then
+        COMPOSITOR="kwin"
+    elif pgrep -x mutter       &>/dev/null; then
+        COMPOSITOR="gnome"
     elif [ -n "${WAYLAND_DISPLAY:-}" ]; then
         COMPOSITOR="wayland-unknown"
     elif [ -n "${DISPLAY:-}" ]; then
-        # X11 — try to detect WM
-        if command -v wmctrl &>/dev/null; then
-            COMPOSITOR=$(wmctrl -m 2>/dev/null | awk '/^Name:/{print tolower($2)}' || echo "x11-unknown")
-        else
-            COMPOSITOR="x11-unknown"
+        if   pgrep -x i3      &>/dev/null; then COMPOSITOR="i3"
+        elif pgrep -x bspwm   &>/dev/null; then COMPOSITOR="bspwm"
+        elif pgrep -x openbox &>/dev/null; then COMPOSITOR="openbox"
+        elif pgrep -x awesome &>/dev/null; then COMPOSITOR="awesome"
+        elif pgrep -x xfwm4   &>/dev/null; then COMPOSITOR="xfwm4"
+        else COMPOSITOR="x11-unknown"
         fi
     else
-        COMPOSITOR="none"  # TTY
+        COMPOSITOR="none"
+    fi
+}
+
+detect_env() {
+    # Same issue with sudo — check process list as fallback
+    if pgrep -x Hyprland &>/dev/null || pgrep -x sway &>/dev/null \
+        || pgrep -x wayfire &>/dev/null || pgrep -x kwin_wayland &>/dev/null; then
+        ENV="wayland"
+    elif [ -n "${WAYLAND_DISPLAY:-}" ]; then
+        ENV="wayland"
+    elif [ -n "${DISPLAY:-}" ]; then
+        ENV="x11"
+    else
+        ENV="tty"
     fi
 }
 
@@ -67,16 +88,6 @@ detect_kernel() {
     esac
 }
 
-detect_env() {
-    if [ -z "${DISPLAY:-}" ] && [ -z "${WAYLAND_DISPLAY:-}" ]; then
-        ENV="tty"
-    elif [ -n "${WAYLAND_DISPLAY:-}" ]; then
-        ENV="wayland"
-    else
-        ENV="x11"
-    fi
-}
-
 detect_all() {
     detect_distro
     detect_compositor
@@ -90,10 +101,9 @@ detect_all() {
     info "Bootloader  : $BOOTLOADER"
     info "Kernel      : $(uname -r) [$KERNEL_TYPE]"
     info "Environment : $ENV"
-    echo ""
+    printf '\n'
 }
 
-# Dependency check — uses detected PKG_MGR for install hint
 check_deps() {
     local missing=()
     for cmd in ollama df du lsblk findmnt jq curl; do

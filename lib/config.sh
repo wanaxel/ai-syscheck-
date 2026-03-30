@@ -1,4 +1,4 @@
-# lib/config.sh — Global defaults (override via env or CLI flags)
+# lib/config.sh — Global defaults and variable declarations
 
 MODEL="${AI_MODEL:-llama3.2}"
 OLLAMA_URL="${OLLAMA_URL:-http://localhost:11434}"
@@ -8,10 +8,28 @@ TOP_N_DIRS="${TOP_N_DIRS:-20}"
 SMART_ENABLED="${SMART_ENABLED:-true}"
 SKIP_CHAT="${SKIP_CHAT:-false}"
 
-# Populated by detect.sh
+# Detected at runtime by detect.sh
 DISTRO=""
 PKG_MGR=""
 COMPOSITOR=""
 BOOTLOADER=""
 KERNEL_TYPE=""
-ENV=""         # tty | wayland | x11
+ENV=""
+
+# Collector outputs — pre-declared so set -u never fires
+DF_OUT=""
+INODE_OUT=""
+MOUNT_OUT=""
+BLK_OUT=""
+DU_OUT=""
+FS_ERRORS=""
+SWAP_OUT=""
+SMART_OUT=""
+KERNEL_OUT=""
+BOOT_OUT=""
+COMPOSITOR_OUT=""
+PKG_OUT=""
+HYPR_OUT=""
+GRUB_OUT=""
+ZEN_OUT=""
+KERN_OUT=""

@@ -1,35 +1,36 @@
 # analyzers/analyze.sh — AI analysis calls, one per collected section
 
+# _trim <var> — truncate to first 800 chars to keep prompt size sane
+_trim() { printf '%s' "${1:-none}" | head -c 800; }
+
 analyze_storage() {
     ai_section "Storage & Space" \
-        "$DF_OUT
-Inodes: $INODE_OUT
-Mounts: $MOUNT_OUT
-FS errors: ${FS_ERRORS:-none}
-SMART: ${SMART_OUT:-not collected}" \
-        "Is storage healthy? What should be cleaned? Are there errors needing a fix?"
+        "$(_trim "$DF_OUT")
+Inodes: $(_trim "$INODE_OUT")
+FS errors: $(_trim "${FS_ERRORS:-none}")" \
+        "Is storage healthy? What needs cleaning? Any errors?"
 }
 
 analyze_kernel() {
     ai_section "Kernel" \
-        "$KERNEL_OUT" \
-        "Is the kernel healthy and well configured for this desktop setup? Suggest cmdline tweaks if useful."
+        "$(_trim "$KERNEL_OUT")" \
+        "Is the kernel healthy? Suggest any useful cmdline tweaks."
 }
 
 analyze_bootloader() {
     ai_section "Bootloader" \
-        "$BOOT_OUT" \
-        "Is the bootloader configured safely? Any risks or misconfigurations?"
+        "$(_trim "$BOOT_OUT")" \
+        "Is the bootloader configured safely? Any risks?"
 }
 
 analyze_compositor() {
     ai_section "Compositor / GPU" \
-        "$COMPOSITOR_OUT" \
-        "Are there compositor or GPU errors? What could cause a crash to TTY and how to fix it?"
+        "$(_trim "$COMPOSITOR_OUT")" \
+        "Any compositor or GPU errors? What could cause a crash to TTY?"
 }
 
 analyze_packages() {
     ai_section "Package Cache" \
-        "$PKG_OUT" \
-        "How much space can be reclaimed? Give exact cleanup commands for $PKG_MGR."
+        "$(_trim "$PKG_OUT")" \
+        "How much space can be reclaimed? Give exact $PKG_MGR cleanup commands."
 }
